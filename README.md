@@ -1,2 +1,2 @@
 # MicroscaleTubulenceAnalysis
-Repository programs for use with analysis of Turbulence Datasets
+Repository with programs for use with analysis of Turbulence Datasets
