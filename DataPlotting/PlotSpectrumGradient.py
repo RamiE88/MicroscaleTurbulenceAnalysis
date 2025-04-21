@@ -28,4 +28,3 @@ KArrayFile = 'KxArr.npy'
 EArr = np.load(f"{FileDir}postProcessing/EnergySpectrum/{Plane}/{EArrayFile}",mmap_mode ='r') 
 KArr = np.load(f"{FileDir}postProcessing/EnergySpectrum/{Plane}/{KArrayFile}",mmap_mode ='r')
 
-print(EArr.shape)
