@@ -35,10 +35,32 @@ KArr = np.load(f"{FolderforResults}/{KArrayFile}",mmap_mode ='r')
 NumEdata,NumTdata = EArr.shape
 NumKData = KArr.shape[0]
 
+
 EGradientArr =open_memmap(f"{FolderforResults}/{EArrayFile[0:13]}GradArr.npy",dtype= float, mode='w+', shape =(NumEdata,NumTdata))
 
 for timeVal in range(NumTdata):
     # Calculate the gradient of energy with respect to wave number
-    EGradientArr[:,timeVal] = np.gradient(EArr[:,timeVal],KArr[:,0],axis=0,edge_order=2)
+    EGradientArr[:,timeVal] = np.gradient(EArr[:,timeVal],KArr[:,timeVal],axis=0,edge_order=1)
+
+print(EArr[:,0]/1e-12)
 
 
+fig1, axes = plt.subplots(1, 2, figsize=(12, 5))
+
+#Gradient vs Wavenumber plot
+axes[0].plot(KArr[:,0], EGradientArr[:,0], 'r-o', linewidth=2)
+axes[0].set_xscale('log')
+#axes[0].set_ylim(-1e-13,-1e-14)
+axes[0].set_xlim(1e-3,1e0)
+axes[0].set_xlabel('Wavenumber')
+axes[0].set_ylabel('Gradient of Energy')
+
+#Energy vs Wavenumber plot
+
+axes[1].loglog(KArr[:,0], EArr[:,0], 'r-o', linewidth=2)
+axes[1].set_xlim(1e-3,1e0)
+axes[1].set_ylim(1e-20,1e5)
+axes[1].set_xlabel('Wavenumber')
+axes[1].set_ylabel('Energy')
+
+plt.show()
