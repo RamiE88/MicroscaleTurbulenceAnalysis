@@ -1,0 +1,11 @@
+'''
+Calculate and plot the 1D Energy specturm vs wave number data by
+
+1. extracting the relevant data from the source folder
+2. calculate the gradient of energy with respect to wave number
+3. plot the energy gradient vs wavenumber
+4. save the time array of the gradient vs wavenumber in the source folder
+
+
+
+'''
