@@ -11,20 +11,34 @@ Calculate and plot the 1D Energy spectrum vs wave number data by
 
 import matplotlib.pyplot as plt
 import numpy as np
+from numpy.lib.format import open_memmap
 
 # User Options
 
 FileDir = '/mnt/d/Documents/CFD/CouetteFlowStudies/CouetteFlow0005/'
 
-Plane = '100pcPlane'
+Plane = '50pcPlane'
 
 EArrayFile = 'EuuStreamwiseArr.npy'
 
 KArrayFile = 'KxArr.npy'
 
 
-# Load Data and create mem-mapped arrays
+# Load Data and create memory-mapped arrays
 
-EArr = np.load(f"{FileDir}postProcessing/EnergySpectrum/{Plane}/{EArrayFile}",mmap_mode ='r') 
-KArr = np.load(f"{FileDir}postProcessing/EnergySpectrum/{Plane}/{KArrayFile}",mmap_mode ='r')
+FolderforResults = f"{FileDir}postProcessing/EnergySpectrum/{Plane}"
+
+EArr = np.load(f"{FolderforResults}/{EArrayFile}",mmap_mode ='r') 
+KArr = np.load(f"{FolderforResults}/{KArrayFile}",mmap_mode ='r') 
+
+# Make new array for gradient data
+NumEdata,NumTdata = EArr.shape
+NumKData = KArr.shape[0]
+
+EGradientArr =open_memmap(f"{FolderforResults}/{EArrayFile[0:13]}GradArr.npy",dtype= float, mode='w+', shape =(NumEdata,NumTdata))
+
+for timeVal in range(NumTdata):
+    # Calculate the gradient of energy with respect to wave number
+    EGradientArr[:,timeVal] = np.gradient(EArr[:,timeVal],KArr[:,0],axis=0,edge_order=2)
+
 
