@@ -7,11 +7,11 @@ import numpy as np
 
 
 
-FileDir = '/mnt/d/Documents/CFD/CouetteFlowStudies/CouetteFlow0005/' # Openfoam, RE 400
+FileDir = '/mnt/d/Documents/CFD/CouetteFlowStudies/CouetteFlow0029/' # Openfoam, RE 400
 #FileDir = '/mnt/d/Documents/Brunel/Data/summary_rhouP_data/'#MD Flow
 
 
-NumTimeRecs =51
+NumTimeRecs =50
 TimeStart =0
 
 
